@@ -3,11 +3,9 @@ services:
     name: incident-management
     env: node
     plan: free
-    buildCommand: npm install && cds deploy --to sqlite:db.sqlite
-    startCommand: cds-serve
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 4004
-    healthCheckPath: /
+    healthCheckPath: /odata/v4/processor
