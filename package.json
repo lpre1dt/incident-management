@@ -26,6 +26,9 @@
         "credentials": {
           "database": "db.sqlite"
         }
+      },
+      "auth": {
+        "kind": "mocked"
       }
     }
   },
