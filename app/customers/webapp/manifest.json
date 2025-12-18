@@ -11,7 +11,7 @@
     "description": "{{appDescription}}",
     "dataSources": {
       "mainService": {
-        "uri": "/processor/",
+        "uri": "/odata/v4/processor/",
         "type": "OData",
         "settings": {
           "odataVersion": "4.0"
@@ -61,7 +61,9 @@
       }
     },
     "routing": {
-      "config": {},
+      "config": {
+        "async": true
+      },
       "routes": [
         {
           "pattern": ":?query:",
