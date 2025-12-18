@@ -1,0 +1,4 @@
+code;name;descr;criticality
+H;High;High priority;1
+M;Medium;Medium priority;2
+L;Low;Low priority;3

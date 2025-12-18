@@ -1,0 +1,6 @@
+code;name;descr;criticality
+N;New;New incident;2
+A;Assigned;Incident assigned to processor;2
+I;In Process;Incident in process;3
+R;Resolved;Incident resolved;5
+C;Closed;Incident closed;0

@@ -1,0 +1,5 @@
+ID;title;urgency_code;status_code;customer_ID
+3b23bb4b-4ac7-4a24-ac02-aa10cabd842c;Server outage in production;H;I;8e59ae90-c0dd-4ef2-a1be-87d33f9e8c47
+3a4ede72-244a-4f5f-8efa-b17e032d01ee;Login issues with portal;M;N;feb04eac-f84f-4232-bd4f-80a178f24a17
+3ccf474c-3881-44b7-99fb-59a2a4668418;Database performance degradation;H;A;8e59ae90-c0dd-4ef2-a1be-87d33f9e8c47
+3583f982-d7df-4aad-ab26-301d4a157cd7;Email delivery delays;L;R;2b87f6ca-28a2-41d6-9c69-1c4a31e2d4d3
