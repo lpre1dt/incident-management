@@ -18,6 +18,11 @@ service ProcessorService {
 annotate ProcessorService.Incidents with @(
   odata.draft.enabled,
   Common.SemanticKey : [title],
+   Common.SideEffects #SetUrgencyAction : {
+    SourceActions : ['setToHighUrgency'],
+    TargetProperties : ['urgency_code', 'urgency'],
+    TargetEntities : ['conversation'] 
+  },
   UI.LineItem : [
     { Value : title, Label : 'Title' },
     { Value : customer.lastName, Label : 'Customer' },
@@ -65,9 +70,10 @@ annotate ProcessorService.Incidents with @(
       $Type : 'UI.DataFieldForAction',
       Label : 'Set to High Urgency',
       Action : 'ProcessorService.setToHighUrgency',
-      ![@UI.Hidden] : {$edmJson: {$If: [{$Eq: [{$Path: 'urgency_code'}, 'H']}, true, false]}}
+      ![@UI.Hidden] : {$edmJson: {$If: [{$Eq: [{$Path: 'urgency_code'}, 'H']}, true, false]}},
     }
   ]
+
 );
 
 annotate ProcessorService.Incidents with {
