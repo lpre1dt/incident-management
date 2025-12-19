@@ -14,6 +14,8 @@ service ProcessorService {
 
 // Annotations for Fiori Elements List Report
 annotate ProcessorService.Incidents with @(
+  odata.draft.enabled,
+  Common.SemanticKey : [title],
   UI.LineItem : [
     { Value : title, Label : 'Title' },
     { Value : customer.lastName, Label : 'Customer' },
@@ -38,10 +40,10 @@ annotate ProcessorService.Incidents with @(
   UI.SelectionFields : [ status_code, urgency_code, customer_ID ],
   UI.FieldGroup #Details : {
     Data : [
-      { Value : title },
-      { Value : customer_ID },
-      { Value : status_code },
-      { Value : urgency_code }
+      { Value : title, Label : 'Title' },
+      { Value : customer_ID, Label : 'Customer' },
+      { Value : status_code, Label : 'Status' },
+      { Value : urgency_code, Label : 'Urgency' }
     ]
   },
   UI.Facets : [
@@ -59,8 +61,18 @@ annotate ProcessorService.Incidents with @(
 );
 
 annotate ProcessorService.Incidents with {
+  ID @(
+    UI.Hidden,
+    Common.Text : title
+  );
+  title @(
+    title : 'Title',
+    Common.FieldControl : #Mandatory
+  );
   customer @(
+    title : 'Customer',
     Common.Text : customer.lastName,
+    Common.FieldControl : #Mandatory,
     Common.ValueList : {
       CollectionPath : 'Customers',
       Parameters : [
@@ -72,11 +84,15 @@ annotate ProcessorService.Incidents with {
     }
   );
   status @(
+    title : 'Status',
     Common.Text : status.name,
+    Common.FieldControl : #Mandatory,
     Common.ValueListWithFixedValues
   );
   urgency @(
+    title : 'Priority',
     Common.Text : urgency.name,
+    Common.FieldControl : #Mandatory,
     Common.ValueListWithFixedValues
   );
 }
@@ -86,8 +102,31 @@ annotate ProcessorService.Conversations with @(
     { Value : timestamp, Label : 'Timestamp' },
     { Value : author, Label : 'Author' },
     { Value : message, Label : 'Message' }
-  ]
+  ],
+  UI.FieldGroup #ConversationDetails : {
+    Data : [
+      { Value : author, Label : 'Author' },
+      { Value : message, Label : 'Message' }
+    ]
+  }
 );
+
+annotate ProcessorService.Conversations with {
+  ID @UI.Hidden;
+  author @(
+    title : 'Author',
+    Common.FieldControl : #Mandatory
+  );
+  message @(
+    title : 'Message',
+    UI.MultiLineText,
+    Common.FieldControl : #Mandatory
+  );
+  timestamp @(
+    title : 'Timestamp',
+    Common.FieldControl : #ReadOnly
+  );
+}
 
 annotate ProcessorService.Customers with @(
   UI.LineItem : [
