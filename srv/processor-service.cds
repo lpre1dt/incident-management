@@ -4,7 +4,9 @@ using { sap.capire.incidents as my } from '../db/schema';
  * Service for processing incidents
  */
 service ProcessorService {
-  entity Incidents as projection on my.Incidents;
+  entity Incidents as projection on my.Incidents actions {
+    action setToHighUrgency(comment : String) returns Incidents;
+  };
   entity Customers as projection on my.Customers;
   entity Conversations as projection on my.Conversations;
   
@@ -56,6 +58,14 @@ annotate ProcessorService.Incidents with @(
       $Type : 'UI.ReferenceFacet',
       Label : 'Conversations',
       Target : 'conversation/@UI.LineItem'
+    }
+  ],
+  UI.Identification : [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Label : 'Set to High Urgency',
+      Action : 'ProcessorService.setToHighUrgency',
+      ![@UI.Hidden] : {$edmJson: {$If: [{$Eq: [{$Path: 'urgency_code'}, 'H']}, true, false]}}
     }
   ]
 );
